@@ -15,7 +15,7 @@ import debugger
 
 debugger = debugger.Debugger()
 #DEBUGGER.load(r"C:\Windows\system32\calc.exe")
-pid = 8976 #input("Enter the PID fo the process to attach to: ")
+pid = input("Enter the PID fo the process to attach to: ")
 debugger.attach(pid)
 
 threads = debugger.enumerate_threads()
@@ -27,7 +27,7 @@ print("[*] " + str(len(threads)) + " threads in process " + str(pid))
 #Output registers value for each thread owned by the process
 for thread in threads:
     thread_context = debugger.get_thread_context(thread)
-    print("[*] Dumping registers for thread ID: " + str(thread))
+    print("[*] Dumping registers for thread ID: 0x%08x" % thread)
     if thread_context and debugger.debuggee_is_wow64:
         print("[**] EIP: 0x%08x" % thread_context.Eip)
         print("[**] ESP: 0x%08x" % thread_context.Esp)
